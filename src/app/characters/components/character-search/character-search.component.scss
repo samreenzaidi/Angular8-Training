@@ -1,0 +1,29 @@
+.search-wrapper {
+  display: block;
+  input {
+    width: 81%;
+    margin-right: 3px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .search-wrapper {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    input {
+      width: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .search-wrapper {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    input {
+      width: auto !important;
+    }
+  }
+}

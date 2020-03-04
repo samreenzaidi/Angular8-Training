@@ -5,43 +5,49 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: false
 })
 export class FilterPipe implements PipeTransform {
-  values: string[] = [];
-  filterKeys: string[] = [];
+  genderItems: any[];
+  speciesItems: any[];
+  originItems: any[];
 
   transform(
     items: any[],
-    genders: string[], species: string[], origins: string[], key: string): any {
+    genders: string[], species: string[], origins: string[]): any {
 
     if (!(genders && species && origins)) {
       return items;
     }
 
-    this.values = [...genders, ...species, ...origins];
 
-    if (this.filterKeys.indexOf(key) === -1) {
-      this.filterKeys = [...this.filterKeys, key]
+
+    if (genders) {
+      this.genderItems = items.filter(item => genders.indexOf(item['gender']) > -1);
     }
-    console.log(this.values);
-    console.log(this.filterKeys);
-    this.filterKeys.map((i, index) => {
-      items = items.filter(item => {
-        return this.values.indexOf(item[i]) > -1
-      }); 
-    });
+    if (species) {
+      this.speciesItems = items.filter(item => species.indexOf(item['species']) > -1);
+    }
+    if (origins) {
+      this.originItems = items.filter(item => origins.indexOf(item['origin']['name']) > -1);
+    }
 
+    let updatedItems1 = [], updatedItems2 = [], finalUpdatedItems = [];
+    for (let prop in this.genderItems) {
+      updatedItems1.push(this.genderItems[prop]);
+    }
 
+    for (let prop in this.speciesItems) {
+      for (let p in updatedItems1) {
+        if (this.speciesItems[prop].id == updatedItems1[p].id)
+          updatedItems2.push(this.speciesItems[prop]);
+      }
+    }
 
-    // if (genders) {
-    //   var items1 = items.filter(item => genders.indexOf(item['gender']) > -1);
-    // }
-    // if (species) {
-    //   var items2 = items.filter(item => species.indexOf(item['species']) > -1);
-    // }
-    // if (origins) {
-    //   var items3 = items.filter(item => origins.indexOf(item['origin']['name']) > -1);
-    // }
-
-    console.log(items)
+    for (let prop in this.originItems) {
+      for (let p in updatedItems2) {
+        if (this.originItems[prop].id == updatedItems2[p].id)
+          finalUpdatedItems.push(this.originItems[prop]);
+      }
+    }
+    items = finalUpdatedItems;
     return items
   }
 

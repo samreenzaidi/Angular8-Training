@@ -1,0 +1,9 @@
+<div class="sort-wrapper">
+    <form [formGroup]="form">
+        <select formControlName="sort" (change)="sortCharacters($event)">
+            <option value="">Sort by ID</option>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </form>
+</div>

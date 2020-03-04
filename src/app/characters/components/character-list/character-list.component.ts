@@ -16,16 +16,13 @@ export class CharacterListComponent implements OnInit {
   genderSubscription:Subscription;
   speciesSubscription:Subscription;
   originSubscription:Subscription;
-  filterKeySubscription: Subscription;
   typeSort:string;
-  filterItems:string[];
   form: FormGroup;
   sortControl: FormControl;
   filterControl: FormControl
   genderItems: string[];
   speciesItems: string[];
   originItems: string[];
-  filterKey: string;
   
   constructor(private characterService: CharacterService) {}
 
@@ -45,9 +42,6 @@ export class CharacterListComponent implements OnInit {
     });
     this.originSubscription = this.characterService.originItems$.subscribe((value:string[])=>{
       this.originItems=value
-    });
-    this.filterKeySubscription = this.characterService.filterKey$.subscribe((value:string)=>{
-      this.filterKey=value
     });
   }
 }

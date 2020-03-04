@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { FormControlsComponent } from './components/form-controls/form-controls.component';
 import { CharacterFilterComponent } from './components/character-filter/character-filter.component';
-
-
+import { CharacterSortComponent } from './components/character-sort/character-sort.component';
+import { CharacterSearchComponent } from './components/character-search/character-search.component';
 
 
 @NgModule({
   declarations: [
     CharacterListComponent,
     CharacterFilterComponent,
-    FormControlsComponent    
+    CharacterSortComponent,
+    CharacterSearchComponent   
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,8 @@ import { CharacterFilterComponent } from './components/character-filter/characte
   exports:[
     CharacterListComponent,
     CharacterFilterComponent,
-    FormControlsComponent
+    CharacterSortComponent,
+    CharacterSearchComponent
   ]
 })
 export class CharactersModule { }

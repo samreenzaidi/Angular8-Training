@@ -18,14 +18,9 @@ export class CharacterFilterComponent implements OnInit {
   genders: string[];
   species: string[];
   origins: string[];
-  filterKeyArr: string[] = [];
-  filterValueArr: string[] = [];
-  filterItems: string[] = [];
-  gender: string[]
   speciesChecked: string[];
   gendersChecked: string[];
   originChecked: string[];
-  filterKey: string;
 
   constructor(private characterService: CharacterService, private formBuilder: FormBuilder) {
     this.filterControl = new FormControl(true);
@@ -39,7 +34,6 @@ export class CharacterFilterComponent implements OnInit {
       .valueChanges
       .pipe(startWith(null))
       .subscribe(() => {
-        this.filterKey=key;
         if (key == 'gender') {
           if (event.target.checked && this.gendersChecked.indexOf(value) === -1) {
             this.gendersChecked = [...this.gendersChecked, value]
@@ -68,7 +62,6 @@ export class CharacterFilterComponent implements OnInit {
       this.characterService.genderItems = this.gendersChecked;
       this.characterService.speciesItems = this.speciesChecked;
       this.characterService.originItems = this.originChecked;
-      this.characterService.filterKey = this.filterKey;
   }
 
   ngOnInit(): void {
