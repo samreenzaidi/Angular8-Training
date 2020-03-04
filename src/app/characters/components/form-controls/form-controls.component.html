@@ -1,0 +1,15 @@
+<div class="character-list_form">
+    <form [formGroup]="form">
+        <span class="search-wrapper">
+            <input name="searchText" formControlName="search">
+            <button (click)="searchCharacter()">Search</button>
+        </span>
+        <span class="sort-wrapper">
+            <select formControlName="sort" (change)="sortCharacters($event)">
+                <option value="">Sort by ID</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </span>
+    </form>
+</div>

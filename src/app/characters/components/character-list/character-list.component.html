@@ -1,0 +1,25 @@
+<div class="character-list">
+    <div class="character-list_container" *ngIf="(characters$)?.length>0">
+        <div class="character-list_items"
+            *ngFor="let character of (characters$ | sort:'id': typeSort | filter: genderItems:speciesItems:originItems:filterKey)">
+            <img [src]="character.image">
+            <div>
+                <span>{{character.name}}</span>
+                <span>{{character.id}}</span>
+                <span>{{character.created | lastcreated}}</span>
+            </div>
+
+            <ul>
+                <li>{{character.status}}</li>
+                <li>{{character.species}}</li>
+                <li>{{character.gender}}</li>
+                <li>{{character.origin.name}}</li>
+                <li>{{character.location.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <ng-template *ngIf="(characters$)?.length==0">
+        <span>No character found !!</span>
+    </ng-template>

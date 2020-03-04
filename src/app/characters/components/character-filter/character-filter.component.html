@@ -1,0 +1,28 @@
+<div class="filter-container">
+    <form [formGroup]="form">
+        <div>
+            <div *ngFor="let s of species">
+                <input type="checkbox" formControlName="filter" (change)="checked('species', s, $event)">{{s}}<br>
+            </div>
+            <hr />
+
+            <div *ngFor="let g of genders">
+                <input type="checkbox" formControlName="filter" (change)="checked('gender', g, $event)">{{g}}<br>
+            </div>
+            <hr />
+
+            <div *ngFor="let o of origins">
+                <input type="checkbox" formControlName="filter" (change)="checked('origin', o, $event)">{{o}}<br>
+            </div>
+        </div>
+    </form>
+<!-- <form [formGroup]="form">
+    <div *ngFor="let filterItem of filterItems">
+        <div *ngFor="let item of filterItem">
+            <input type="checkbox" class="form-check-input" (click)="checked(item,$event)" formControlName="filter">
+            
+        </div>
+    </div>
+</form> -->
+    <pre>Selected items: <span *ngFor="let filterItem of filteredArr" style="padding-right:10px;"></span></pre>
+</div>
