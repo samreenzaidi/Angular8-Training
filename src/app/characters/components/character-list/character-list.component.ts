@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
 import { Character } from '../../models/character';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {  Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-character-list',
@@ -12,36 +12,26 @@ import {  Subscription, BehaviorSubject } from 'rxjs';
 export class CharacterListComponent implements OnInit {
   characters$: Character[];
   charactersSubscription: Subscription;
-  typeSortSubscription:Subscription;
-  genderSubscription:Subscription;
-  speciesSubscription:Subscription;
-  originSubscription:Subscription;
-  typeSort:string;
+  typeSortSubscription: Subscription;
+  filterItemsSubscription: Subscription;
+  typeSort: string;
   form: FormGroup;
   sortControl: FormControl;
   filterControl: FormControl
-  genderItems: string[];
-  speciesItems: string[];
-  originItems: string[];
-  
-  constructor(private characterService: CharacterService) {}
+  filterItems: { gender: string[]; species: string[]; origin: string[]; }[]
+
+  constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
     this.characterService.getUpdatedData();
     this.charactersSubscription = this.characterService.character$.subscribe((value: Character[]) => {
       this.characters$ = value
     });
-    this.typeSortSubscription=this.characterService.typeSort$.subscribe((value:string)=>{
+    this.typeSortSubscription = this.characterService.typeSort$.subscribe((value: string) => {
       this.typeSort = value
     });
-    this.genderSubscription = this.characterService.genderItems$.subscribe((value:string[])=>{
-      this.genderItems=value
-    });
-    this.speciesSubscription = this.characterService.speciesItems$.subscribe((value:string[])=>{
-      this.speciesItems=value
-    });
-    this.originSubscription = this.characterService.originItems$.subscribe((value:string[])=>{
-      this.originItems=value
+    this.filterItemsSubscription = this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
+      this.filterItems = value
     });
   }
 }

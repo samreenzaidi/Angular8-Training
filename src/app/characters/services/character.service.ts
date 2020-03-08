@@ -8,15 +8,20 @@ import { Character } from '../models/character';
   providedIn: 'root'
 })
 export class CharacterService {
-  private _typeSort:string;
-  private _originItems:string[];
-  private _speciesItems:string[];
-  private _genderItems:string[];
+  private _typeSort: string;
+  private _filterItems: {
+    gender: string[];
+    species: string[];
+    origin: string[];
+  }[];
   public character$: BehaviorSubject<Character[]> = new BehaviorSubject(null);
   public typeSort$: BehaviorSubject<string> = new BehaviorSubject(null);
-  public originItems$: BehaviorSubject<string[]> = new BehaviorSubject(null);
-  public speciesItems$: BehaviorSubject<string[]> = new BehaviorSubject(null);
-  public genderItems$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+
+  public filterItems$: BehaviorSubject<{
+    gender: string[];
+    species: string[];
+    origin: string[];
+  }[]> = new BehaviorSubject(null);
 
   get typeSort() {
     return this._typeSort;
@@ -27,32 +32,13 @@ export class CharacterService {
     this.typeSort$.next(this._typeSort);
   }
 
-  get originItems(){
-    return this._originItems;
-  }
-  
-  set originItems(value:string[]){
-    this._originItems=value;
-    this.originItems$.next(this._originItems);
+  get filterItems() {
+    return this._filterItems;
   }
 
-
-  get speciesItems(){
-    return this._speciesItems;
-  }
-
-  set speciesItems(value: string[]) {
-    this._speciesItems = value;
-    this.speciesItems$.next(this._speciesItems);
-  }
-  
-  get genderItems(){
-    return this._genderItems;
-  }
-
-  set genderItems(value: string[]) {
-    this._genderItems = value;
-    this.genderItems$.next(this._genderItems);
+  set filterItems(value: { gender: string[]; species: string[]; origin: string[]; }[]) {
+    this._filterItems = value;
+    this.filterItems$.next(this._filterItems);
   }
 
   constructor(private http: HttpClient) { }
@@ -65,13 +51,13 @@ export class CharacterService {
     return this.http.get<Character[]>(`${environment.apiEndPoint}/results?name=${name}`);
   }
 
-  getUpdatedSearchData(value:string) {
+  getUpdatedSearchData(value: string) {
     this.searchData(value).subscribe((data: any) => {
       this.character$.next(data);
     });
   }
 
-  getUpdatedData(){
+  getUpdatedData() {
     this.getData().subscribe((data: any) => {
       this.character$.next(data);
     });
