@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CharacterFilterComponent } from './components/character-filter/character-filter.component';
 import { CharacterSortComponent } from './components/character-sort/character-sort.component';
 import { CharacterSearchComponent } from './components/character-search/character-search.component';
+import { FiltersTagsComponent } from './components/filters-tags/filters-tags.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CharacterSearchComponent } from './components/character-search/characte
     CharacterListComponent,
     CharacterFilterComponent,
     CharacterSortComponent,
-    CharacterSearchComponent   
+    CharacterSearchComponent,
+    FiltersTagsComponent   
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { CharacterSearchComponent } from './components/character-search/characte
     CharacterListComponent,
     CharacterFilterComponent,
     CharacterSortComponent,
-    CharacterSearchComponent
+    CharacterSearchComponent,
+    FiltersTagsComponent
   ]
 })
 export class CharactersModule { }

@@ -17,8 +17,8 @@ export class CharacterListComponent implements OnInit {
   typeSort: string;
   form: FormGroup;
   sortControl: FormControl;
-  filterControl: FormControl
-  filterItems: { gender: string[]; species: string[]; origin: string[]; }[]
+  filterControl: FormControl;
+  filterItems: { gender: string[]; species: string[]; origin: string[]; }[];
 
   constructor(private characterService: CharacterService) { }
 

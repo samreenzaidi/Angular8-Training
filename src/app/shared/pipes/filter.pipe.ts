@@ -27,7 +27,6 @@ export class FilterPipe implements PipeTransform {
 
     for (let prop in speciesItems) {
       for (let p in updatedItems1) {
-        console.log(speciesItems)
         if (speciesItems[prop].id == updatedItems1[p].id)
           updatedItems2.push(speciesItems[prop]);
       }

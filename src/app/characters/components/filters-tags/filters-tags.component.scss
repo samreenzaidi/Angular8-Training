@@ -1,0 +1,15 @@
+.filter-tags {
+  &-links {
+    display: inline-block;
+    margin: 0 5px;
+    &:first-child {
+      margin-left: 0;
+    }
+    button {
+      background-color: gray;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+    }
+  }
+}

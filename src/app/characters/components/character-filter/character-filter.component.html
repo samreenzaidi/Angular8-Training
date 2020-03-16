@@ -4,8 +4,8 @@
         <div class="box">
             <h3>Gender</h3>
             <div *ngFor="let items of filterItems">
-                <div *ngFor="let g of items.gender">
-                    <input type="checkbox" formControlName="filter" (change)="checked('gender', g, $event)"><span
+                <div *ngFor="let g of items.gender; let i = index" formArrayName="gender">
+                    <input type="checkbox" [formControlName]="i" (change)="checked('gender', g, $event)"><span
                         class="checkbox-label">{{g}}</span><br>
                 </div>
             </div>
@@ -14,8 +14,8 @@
         <div class="box">
             <h3>Species</h3>
             <div *ngFor="let items of filterItems">
-                <div *ngFor="let s of items.species">
-                    <input type="checkbox" formControlName="filter" (change)="checked('species', s, $event)"><span
+                <div *ngFor="let s of items.species; let i = index" formArrayName="species">
+                    <input type="checkbox" [formControlName]="i" (change)="checked('species', s, $event)"><span
                         class="checkbox-label">{{s}}</span><br>
                 </div>
             </div>
@@ -24,8 +24,8 @@
         <div class="box">
             <h3>Origin</h3>
             <div *ngFor="let items of filterItems">
-                <div *ngFor="let o of items.origin">
-                    <input type="checkbox" formControlName="filter" (change)="checked('origin', o, $event)"><span
+                <div *ngFor="let o of items.origin; let i = index" formArrayName="origin">
+                    <input type="checkbox" [formControlName]="i" (change)="checked('origin', o, $event)"><span
                         class="checkbox-label">{{o}}</span><br>
                 </div>
             </div>
