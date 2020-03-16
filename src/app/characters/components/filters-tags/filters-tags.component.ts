@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { CharacterService } from '../../services/character.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { CharacterFilterComponent } from '../character-filter/character-filter.component';
-import { emit } from 'cluster';
 
 @Component({
   selector: 'app-filters-tags',
