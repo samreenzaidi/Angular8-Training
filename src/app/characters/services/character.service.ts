@@ -16,18 +16,15 @@ export class CharacterService {
   }[];
   public character$: BehaviorSubject<Character[]> = new BehaviorSubject(null);
   public typeSort$: BehaviorSubject<string> = new BehaviorSubject(null);
-
-  public filterItems$: BehaviorSubject<{
-    gender: string[];
-    species: string[];
-    origin: string[];
-  }[]> = new BehaviorSubject(null);
+  public filterItems$: BehaviorSubject<{ gender: string[]; species: string[]; origin: string[]; }[]> = new BehaviorSubject(null);
 
   get typeSort() {
+    console.log("getter");
     return this._typeSort;
   }
 
   set typeSort(value: string) {
+    console.log("setter");
     this._typeSort = value;
     this.typeSort$.next(this._typeSort);
   }

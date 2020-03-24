@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
 import { Character } from '../../models/character';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-character-list',
@@ -11,27 +11,28 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 })
 export class CharacterListComponent implements OnInit {
   characters$: Character[];
-  charactersSubscription: Subscription;
-  typeSortSubscription: Subscription;
-  filterItemsSubscription: Subscription;
   typeSort: string;
-  form: FormGroup;
-  sortControl: FormControl;
-  filterControl: FormControl;
   filterItems: { gender: string[]; species: string[]; origin: string[]; }[];
 
   constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
-    this.characterService.getUpdatedData();
-    this.charactersSubscription = this.characterService.character$.subscribe((value: Character[]) => {
+    this.characterService.getData().subscribe((value: Character[]) => {
       this.characters$ = value
     });
-    this.typeSortSubscription = this.characterService.typeSort$.subscribe((value: string) => {
+
+    this.characterService.character$.subscribe((value: Character[]) => {
+      this.characters$ = value
+    });
+
+    this.characterService.typeSort$.subscribe((value: string) => {
       this.typeSort = value
     });
-    this.filterItemsSubscription = this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
+
+    this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
       this.filterItems = value
     });
   }
+
+
 }

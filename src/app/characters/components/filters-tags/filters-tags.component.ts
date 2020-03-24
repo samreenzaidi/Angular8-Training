@@ -10,8 +10,7 @@ import { CharacterFilterComponent } from '../character-filter/character-filter.c
   styleUrls: ['./filters-tags.component.scss']
 })
 export class FiltersTagsComponent implements OnInit {
-  filterTags: { gender: string[]; species: string[]; origin: string[]; }[]
-  filterItemsSubscription: Subscription;
+  filterTags: { gender: string[]; species: string[]; origin: string[]; }[];
   form: FormGroup;
   filterControl: FormControl;
 
@@ -37,12 +36,11 @@ export class FiltersTagsComponent implements OnInit {
         this.filterTags[0].origin.splice(i, 1);
       }
     }
-    
     this.characterService.filterItems = this.filterTags;
   }
 
   ngOnInit(): void {
-    this.filterItemsSubscription = this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
+    this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
       this.filterTags = value
     });
   }

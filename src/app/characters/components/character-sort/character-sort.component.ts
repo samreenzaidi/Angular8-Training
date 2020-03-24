@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { filter, startWith } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { CharacterService } from '../../services/character.service';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
 import { Character } from '../../models/character';
 
 @Component({
@@ -10,29 +9,22 @@ import { Character } from '../../models/character';
   templateUrl: './character-sort.component.html',
   styleUrls: ['./character-sort.component.scss']
 })
-export class CharacterSortComponent implements OnInit {
+export class CharacterSortComponent {
   characters$: Character[];
   form: FormGroup;
-  sortControl: FormControl;
 
   constructor(private characterService: CharacterService, private formBuilder: FormBuilder) {
-    this.sortControl = new FormControl("");
     this.form = this.formBuilder.group({
-      'sort': this.sortControl
+      'sort': new FormControl("")
     })
   }
 
-
   sortCharacters(e): void {
-    this.sortControl
+    this.form.get('sort')
       .valueChanges
       .pipe(startWith(null))
-      .subscribe((value) => {
+      .subscribe(() => {
         this.characterService.typeSort = e.target.value;
       })
-  }
-
-  ngOnInit(): void {
-
   }
 }

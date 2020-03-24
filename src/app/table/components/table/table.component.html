@@ -1,0 +1,40 @@
+<div class="container">
+    <div>
+        <table>
+            <th *ngFor="let key of staticKeys">
+                <tr>{{key}}</tr>
+            </th>
+            <tr *ngFor="let data of staticData">
+                <td>{{data.name}}</td>
+                <td>{{data.class}}</td>
+                <td>{{data.section}}</td>
+                <td>{{data.sub1}}</td>
+                <td>{{data.sub2}}</td>
+                <td>{{data.sub3}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <div>
+        <div class="btn-group">
+            <button [ngClass]="{'active':isActive=='grid'}" (click)="toggle($event,isActive)">Grid View</button>
+            <button [ngClass]="{'active':isActive=='list'}" (click)="toggle($event,isActive)">List View</button>
+        </div>
+
+        <div class="sort-wrapper">
+            <form [formGroup]="form">
+                <select formControlName="sort" (change)="sortRows($event)">
+                    <option value="asc">Price: Low to High</option>
+                    <option value="desc">Price: High to Low</option>
+                </select>
+            </form>
+        </div>
+
+        <hr />
+        <ul [ngClass]="{'row-count':isActive=='grid'}">
+            <li *ngFor="let row of (rows | sort: typeSort)">
+                {{row.price}}
+            </li>
+        </ul>
+    </div>
+</div>

@@ -4,8 +4,6 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
 import { LastcreatedPipe } from './pipes/lastcreated.pipe';
 
-
-
 @NgModule({
   declarations: [
     FilterPipe,

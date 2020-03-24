@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { filter, startWith } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { CharacterService } from '../../services/character.service';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { Character } from '../../models/character';
 
 @Component({
@@ -12,39 +12,25 @@ import { Character } from '../../models/character';
 })
 
 export class CharacterSearchComponent implements OnInit {
-  characters$: Character[];
+  characters: Character[];
   form: FormGroup;
-  searchControl: FormControl;
-  sortControl: FormControl;
 
   constructor(private characterService: CharacterService, private formBuilder: FormBuilder) {
-    this.searchControl = new FormControl("");
-    this.sortControl = new FormControl("");
     this.form = this.formBuilder.group({
-      'search': this.searchControl,
-      'sort': this.sortControl
+      'search': new FormControl("")
     })
   }
 
   searchCharacter(): void {
-    this.characterService.getUpdatedSearchData(this.searchControl.value);
-  }
-
-  sortCharacters(e): void {
-    this.sortControl
-      .valueChanges
-      .pipe(startWith(null))
-      .subscribe((value) => {
-        this.characterService.typeSort = e.target.value;
-      })
+    this.characterService.getUpdatedSearchData(this.form.get("search").value);
   }
 
   ngOnInit(): void {
-    this.searchControl
+    this.form.get('search')
       .valueChanges
       .pipe(filter(value => !value))// empty strings are true
       .subscribe(() => {
-        of(this.characters$).subscribe(() => this.characterService.getUpdatedData());
+        of(this.characters).subscribe(() => this.characterService.getUpdatedData());
       })
   }
 }

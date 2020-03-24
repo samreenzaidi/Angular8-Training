@@ -2,9 +2,8 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { Character } from '../../models/character';
 import { CharacterService } from '../../services/character.service';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
-import { of, Observable, Subscription } from 'rxjs';
-import { filter, startWith, debounceTime, distinctUntilChanged, } from 'rxjs/operators';
-import { IfStmt } from '@angular/compiler';
+import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,6 @@ export class CharacterFilterComponent implements OnInit {
   gender: string[];
   species: string[];
   origin: string[];
-  filterItemsSubscription: Subscription;
   maleControl: FormControl;
   femaleControl: FormControl;
   unknownControl: FormControl;
@@ -118,9 +116,8 @@ export class CharacterFilterComponent implements OnInit {
       this.characterService.filterItems = this.filterItemsChecked;
     })
 
-    this.filterItemsSubscription = this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
+    this.characterService.filterItems$.subscribe((value: { gender: string[]; species: string[]; origin: string[]; }[]) => {
       if (value) {
-        (this.form.controls.gender as FormArray).reset();
         value[0].gender.forEach((o, i) => {
           const genderControl = new FormControl(true);
           (this.form.controls.gender as FormArray).setControl(i, genderControl);

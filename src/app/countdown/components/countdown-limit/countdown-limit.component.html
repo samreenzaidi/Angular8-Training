@@ -1,0 +1,13 @@
+<div>Enter time limit
+    <form [formGroup]="form">
+        <input type="text" formControlName="limit">
+    </form>
+</div>
+
+
+<div class="btn-group">
+    <button (click)="toggleCountdown(isStarted)">Start/Pause</button>
+    <button (click)="reset()">Reset</button>
+</div>
+
+<ul #paused></ul>
