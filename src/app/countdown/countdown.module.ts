@@ -6,6 +6,7 @@ import { CountdownDateComponent } from './components/countdown-date/countdown-da
 import { CountdownCounterComponent } from './components/countdown-counter/countdown-counter.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CountdownHomeComponent } from './components/countdown-home/countdown-home.component';
+import { CountdownRoutingModule } from './countdown-routing.module';
 
 
 
@@ -19,6 +20,7 @@ import { CountdownHomeComponent } from './components/countdown-home/countdown-ho
   ],
   imports: [
     CommonModule,
+    CountdownRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],

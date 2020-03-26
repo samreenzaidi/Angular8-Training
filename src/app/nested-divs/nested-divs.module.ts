@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './components/home/home.component';
+import { NestedMainComponent } from './components/nested-main/nested-main.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [HomeComponent],
+  declarations: [NestedMainComponent],
+  imports: [CommonModule],
+  exports: [NestedMainComponent],
 })
 export class NestedDivsModule { }
